@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "f49897ab-08b6-422b-9ad0-20b7c3a58ef7",
+		"name": "Hackaton14",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48376079",
+		"_collection_link": "https://alexmax123max-2155008.postman.co/workspace/Miguel-Cordova-Team's-Workspace~25b3a8aa-8002-44a7-8e4d-a04a0d605855/collection/48376079-f49897ab-08b6-422b-9ad0-20b7c3a58ef7?action=share&source=collection_link&creator=48376079"
+	},
+	"item": [
+		{
+			"name": "New User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"cordova\",\r\n  \"email\": \"cordova@example.com\",\r\n  \"password\": \"123456\",\r\n  \"roles\": [\"admin\"] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6969/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"cordova\",\r\n  \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6969/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:6969/api/auth/signout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"api",
+						"auth",
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6969/api/test/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"api",
+						"test",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users Only",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjBjYzVkMmU2OTEzMWU3YzMxNGM3OSIsImlhdCI6MTc2Mzc1ODY0MiwiZXhwIjoxNzYzODQ1MDQyfQ.Vi4xcL7B_yankOrDtxjvTmU25eFBklwgwzkOF0qXlNM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:6969/api/test/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"api",
+						"test",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Moderator Only",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjBkMmE5YjU2NDkwOGVkYzRjZWU0OCIsImlhdCI6MTc2Mzc1ODc5NSwiZXhwIjoxNzYzODQ1MTk1fQ.U8-s8hazdka7m_pd898dB4tEW6SeGgkxWbionSKtHEE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:6969/api/test/moderator",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"api",
+						"test",
+						"moderator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Only",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjBkMzgwYjU2NDkwOGVkYzRjZWU1MSIsImlhdCI6MTc2Mzc1ODk4NSwiZXhwIjoxNzYzODQ1Mzg1fQ.wWwmMXLtLYsjbu8NVlEMsLJBKJUqGkUsf4QD3UCiDLc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:6969/api/test/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6969",
+					"path": [
+						"api",
+						"test",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
