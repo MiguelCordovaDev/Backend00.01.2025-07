@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Curier - Tracking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{font-family:Segoe UI,Tahoma,Arial,sans-serif;background:#f6f8fb;margin:0;padding:16px}
+    .wrap{max-width:1100px;margin:0 auto}
+    .header{background:#fff;padding:16px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+    .btn{border:0;border-radius:8px;padding:10px 16px;cursor:pointer;font-weight:600}
+    .btn-primary{background:#4f46e5;color:#fff}
+    .btn-danger{background:#ef4444;color:#fff}
+    .card{background:#fff;padding:16px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.06);margin-top:16px}
+    .grid{display:grid;gap:16px}
+    @media(min-width:900px){.grid{grid-template-columns: 1fr 1fr}}
+    .status{display:inline-block;padding:4px 10px;border-radius:12px;background:#eef2ff;color:#3730a3;font-size:12px;font-weight:700}
+    .timeline{margin-top:12px;padding-left:12px;border-left:3px solid #e5e7eb}
+    .item{margin:12px 0}
+    .chat{display:flex;flex-direction:column;height:380px;border:1px solid #e5e7eb;border-radius:10px}
+    .msgs{padding:12px;overflow:auto;flex:1}
+    .chat input{border:1px solid #e5e7eb;border-radius:8px;padding:10px}
+    .row{display:flex;gap:8px}
+    .pkg{border:1px solid #e5e7eb;padding:12px;border-radius:8px;cursor:pointer}
+    .pkg:hover{border-color:#4f46e5}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div>
+        <strong>🚚 Sistema de Curier</strong>
+      </div>
+      <div class="row">
+        <div id="userName" style="align-self:center"></div>
+        <button class="btn btn-danger" onclick="logout()">Cerrar sesión</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row" style="gap:12px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="showTab('create')">Nuevo envío</button>
+        <button class="btn" onclick="showTab('my')">Mis paquetes</button>
+        <button class="btn" onclick="showTab('track')">Rastrear</button>
+      </div>
+    </div>
+
+    <div id="tab-create" class="card">
+      <h3>Crear nuevo envío</h3>
+      <form id="formCreate" class="grid" onsubmit="return false;">
+        <div>
+          <label>Destinatario *</label>
+          <input required name="receiver_name" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px">
+        </div>
+        <div>
+          <label>Teléfono</label>
+          <input name="receiver_phone" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px">
+        </div>
+        <div style="grid-column:1/-1">
+          <label>Dirección *</label>
+          <input required name="receiver_address" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px">
+        </div>
+        <div style="grid-column:1/-1">
+          <label>Descripción</label>
+          <input name="description" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px">
+        </div>
+        <div>
+          <label>Peso (kg)</label>
+          <input name="weight" type="number" step="0.01" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px">
+        </div>
+        <div style="grid-column:1/-1">
+          <button class="btn btn-primary" onclick="createPackage()">Crear envío</button>
+        </div>
+      </form>
+      <div id="alertCreate"></div>
+    </div>
+
+    <div id="tab-my" class="card" style="display:none">
+      <h3>Mis paquetes</h3>
+      <div id="listMy" class="grid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))"></div>
+    </div>
+
+    <div id="tab-track" class="card" style="display:none">
+      <h3>Rastrear paquete</h3>
+      <div class="row">
+        <input id="trackingInput" placeholder="PKG**********" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:8px">
+        <button class="btn btn-primary" onclick="trackPackage()">Buscar</button>
+      </div>
+
+      <div id="trackingResult" style="margin-top:12px;display:none">
+        <div id="pkgInfo"></div>
+
+        <div class="grid" style="margin-top:12px">
+          <div>
+            <h4>Historial</h4>
+            <div id="timeline" class="timeline"></div>
+          </div>
+          <div>
+            <h4>Chat</h4>
+            <div class="chat">
+              <div id="msgs" class="msgs"></div>
+              <div class="row" style="padding:10px">
+                <input id="msgInput" placeholder="Escribe un mensaje...">
+                <button class="btn btn-primary" onclick="sendMessage()">Enviar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/tracking.js"></script>
+</body>
+</html>
